@@ -8,21 +8,25 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j
 @Controller
 public class MainController {
 
-    @Setter(onMethod_ = @Value("${java.version}"))
+/*    @Setter(onMethod_ = @Value("${java.version}"))
     private String javaVersion;
 
     @Setter(onMethod_ = @Value("${spring.application.name}"))
-    private String appName;
+    private String appName;*/
+
+    
+
 
 
     @PostConstruct
     public void init() {
-        log.warn("AppInfo: {} {}", appName, javaVersion);
+//        log.warn("AppInfo: {} {}", appName, javaVersion);
 //        System.out.println(javaVersion);
 //        System.out.println(appName);
     }
