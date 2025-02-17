@@ -1,5 +1,6 @@
 package kg.alatoo.bookstore.services;
 
+import kg.alatoo.bookstore.NotFoundException;
 import kg.alatoo.bookstore.entities.Book;
 import org.springframework.stereotype.Service;
 
@@ -92,5 +93,13 @@ public class InMemoryBookService implements BookService {
                     .collect(Collectors.toList());
         }
         return new ArrayList<>(books.values());
+    }
+
+    @Override
+    public Book getBookById(Long id) {
+        if (!books.containsKey(id)) {
+            throw new NotFoundException("Book with id " + id + " not found");
+        }
+        return books.get(id);
     }
 }

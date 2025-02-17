@@ -12,4 +12,6 @@ public interface BookService {
     Book patchBook(Long id, Book book);
 
     List<Book> getBooks(String publisher);
+
+    Book getBookById(Long id);
 }
