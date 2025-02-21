@@ -1,6 +1,5 @@
 package kg.alatoo.bookstore;
 
-import kg.alatoo.bookstore.entities.Book;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,13 +14,12 @@ public class BookStoreApplication {
 
 //        Book hello = new Book(1, "Hello", null, null, null, null);
 
-        Book book = Book.builder()
+        /*Book book = Book.builder()
                 .id(1l)
                 .title("Hello")
                 .build();
 
-        System.out.println(book);
-
+        System.out.println(book);*/
 
     }
 
