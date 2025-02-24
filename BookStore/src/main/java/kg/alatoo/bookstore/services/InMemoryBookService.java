@@ -1,12 +1,16 @@
 package kg.alatoo.bookstore.services;
 
 import kg.alatoo.bookstore.NotFoundException;
+import kg.alatoo.bookstore.dto.BookListDto;
 import kg.alatoo.bookstore.entities.Book;
 import kg.alatoo.bookstore.entities.Publisher;
+import kg.alatoo.bookstore.mappers.BookMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class InMemoryBookService implements BookService {
@@ -14,9 +18,13 @@ public class InMemoryBookService implements BookService {
     private static long bookNextId = 1;
     private static long publisherNextId = 1;
 
+    private final BookMapper bookMapper;
+
     Map<Long, Book> books = new HashMap<>();
 
-    public InMemoryBookService() {
+    public InMemoryBookService(BookMapper bookMapper) {
+        this.bookMapper = bookMapper;
+
         Publisher alatooPublisher = Publisher.builder()
                 .name("Alatoo Public Books")
                 .address("Ankara 1/8")
@@ -92,7 +100,9 @@ public class InMemoryBookService implements BookService {
     }
 
     @Override
-    public List<Book> getBooks(String publisher) {
+    public List<BookListDto> getBooks(String publisher) {
+
+        List<Book> booksForReturn;
         if (publisher != null) {
             final String finalPublisher  = publisher.toLowerCase();
             /*ArrayList<Book> booksToReturn = new ArrayList<>();
@@ -102,12 +112,15 @@ public class InMemoryBookService implements BookService {
                 }
             }
             return booksToReturn;*/
-            return books.values()
+            booksForReturn = books.values()
                     .stream()
                     .filter(b -> b.getPublisher().getName().toLowerCase().equals(finalPublisher))
-                    .collect(Collectors.toList());
+                    .toList();
+        } else {
+            booksForReturn = new ArrayList<>(books.values());
         }
-        return new ArrayList<>(books.values());
+
+        return bookMapper.toBookListDtos(booksForReturn); // converts to BookListDto each Book
     }
 
     @Override

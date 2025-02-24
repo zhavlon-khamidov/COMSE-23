@@ -1,20 +1,15 @@
 package kg.alatoo.bookstore.controllers;
 
-import kg.alatoo.bookstore.NotFoundException;
+import kg.alatoo.bookstore.dto.BookListDto;
 import kg.alatoo.bookstore.entities.Book;
-import kg.alatoo.bookstore.repositories.BookRepository;
 import kg.alatoo.bookstore.services.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -35,7 +30,7 @@ public class BookController {
 
 
     @GetMapping
-    public List<Book> getAllBooks(
+    public List<BookListDto> getAllBooks(
             @RequestParam(value = "publisher", required = false) String publisher
     ) {
         return bookService.getBooks(publisher);

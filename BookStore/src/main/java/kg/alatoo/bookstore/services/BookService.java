@@ -1,5 +1,6 @@
 package kg.alatoo.bookstore.services;
 
+import kg.alatoo.bookstore.dto.BookListDto;
 import kg.alatoo.bookstore.entities.Book;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface BookService {
 
     Book patchBook(Long id, Book book);
 
-    List<Book> getBooks(String publisher);
+    List<BookListDto> getBooks(String publisher);
 
     Book getBookById(Long id);
 }
