@@ -22,7 +22,7 @@ public class Book {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue
-    Long id;
+    private Long id;
     @ToString.Include
     private String title;
     private String description;

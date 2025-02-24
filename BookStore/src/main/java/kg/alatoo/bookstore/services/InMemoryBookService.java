@@ -5,6 +5,7 @@ import kg.alatoo.bookstore.dto.BookListDto;
 import kg.alatoo.bookstore.entities.Book;
 import kg.alatoo.bookstore.entities.Publisher;
 import kg.alatoo.bookstore.mappers.BookMapper;
+import kg.alatoo.bookstore.mappers.BookMapstructMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,11 +20,13 @@ public class InMemoryBookService implements BookService {
     private static long publisherNextId = 1;
 
     private final BookMapper bookMapper;
+    private final BookMapstructMapper bookMapstructMapper;
 
     Map<Long, Book> books = new HashMap<>();
 
-    public InMemoryBookService(BookMapper bookMapper) {
+    public InMemoryBookService(BookMapper bookMapper, BookMapstructMapper bookMapstructMapper) {
         this.bookMapper = bookMapper;
+        this.bookMapstructMapper = bookMapstructMapper;
 
         Publisher alatooPublisher = Publisher.builder()
                 .name("Alatoo Public Books")
