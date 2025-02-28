@@ -21,11 +21,8 @@ public class BookController {
 
     @GetMapping("{id}")
     public ResponseEntity<Book> getBookById(@PathVariable("id") Long id) {
-        Book book = bookService.getBookById(id);
-        if (book == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().body(book);
+        //TODO: solve an issue with infinite loop providing json objects
+        return ResponseEntity.ok().body(bookService.getBookById(id));
     }
 
 
