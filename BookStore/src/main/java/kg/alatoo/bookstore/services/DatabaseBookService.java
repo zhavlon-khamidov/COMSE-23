@@ -21,7 +21,10 @@ public class DatabaseBookService implements BookService {
 
     @Override
     public Book addBook(Book book) {
-        return null;
+        if (book.getId()!=null && book.getId()!=0) {
+            throw new IllegalArgumentException("book id should not be provided for creating new book");
+        }
+        return bookRepository.save(book);
     }
 
     @Override

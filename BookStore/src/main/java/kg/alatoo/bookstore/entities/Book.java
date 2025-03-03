@@ -2,6 +2,9 @@ package kg.alatoo.bookstore.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -23,14 +26,22 @@ public class Book {
     @Id
     @GeneratedValue
     private Long id;
+
     @ToString.Include
+    @NotNull(message = "Title must not be null")
+    @NotEmpty(message = "Title must not be empty")
+    @NotBlank(message = "Title must not be blank")
+    @Column(nullable = false, length = 20)
     private String title;
+
     private String description;
+
     @ToString.Include
     private String isbn;
 
     @ManyToMany
     private List<Author> authors;
+
     @ManyToOne
     private Publisher publisher;
 

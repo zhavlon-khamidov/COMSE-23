@@ -6,6 +6,7 @@ import kg.alatoo.bookstore.services.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -34,7 +35,7 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> createBook(@RequestBody Book book) {
+    public ResponseEntity<Book> createBook(@RequestBody @Validated Book book) {
         log.debug("Creating the Book {}", book.toString());
         Book saved = bookService.addBook(book);
         log.debug("Book {} created", saved);
