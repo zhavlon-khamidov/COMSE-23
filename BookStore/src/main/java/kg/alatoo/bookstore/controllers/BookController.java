@@ -5,12 +5,12 @@ import kg.alatoo.bookstore.entities.Book;
 import kg.alatoo.bookstore.services.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -28,10 +28,12 @@ public class BookController {
 
 
     @GetMapping
-    public List<BookListDto> getAllBooks(
-            @RequestParam(value = "publisher", required = false) String publisher
+    public Page<BookListDto> getAllBooks(
+            @RequestParam(value = "publisher", required = false) String publisher,
+            @RequestParam(required = false) Integer pageNumber,
+            @RequestParam(required = false) Integer pageSize
     ) {
-        return bookService.getBooks(publisher);
+        return bookService.getBooks(publisher, pageNumber, pageSize);
     }
 
     @PostMapping

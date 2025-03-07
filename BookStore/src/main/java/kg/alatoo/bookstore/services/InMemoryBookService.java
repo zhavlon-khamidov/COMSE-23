@@ -6,6 +6,8 @@ import kg.alatoo.bookstore.entities.Book;
 import kg.alatoo.bookstore.entities.Publisher;
 import kg.alatoo.bookstore.mappers.BookMapper;
 import kg.alatoo.bookstore.mappers.BookMapstructMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -103,7 +105,7 @@ public class InMemoryBookService implements BookService {
     }
 
     @Override
-    public List<BookListDto> getBooks(String publisher) {
+    public Page<BookListDto> getBooks(String publisher, Integer pageNumber, Integer pageSize) {
 
         List<Book> booksForReturn;
         if (publisher != null) {
@@ -123,7 +125,7 @@ public class InMemoryBookService implements BookService {
             booksForReturn = new ArrayList<>(books.values());
         }
 
-        return bookMapper.toBookListDtos(booksForReturn); // converts to BookListDto each Book
+        return new PageImpl<>(bookMapper.toBookListDtos(booksForReturn)); // converts to BookListDto each Book
     }
 
     @Override
