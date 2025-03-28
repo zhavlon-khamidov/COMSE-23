@@ -1,6 +1,7 @@
 package kg.alatoo.bookstore.entities;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -19,12 +20,14 @@ import java.util.List;
 //@Value
 @Builder
 @Entity
+@Schema(description = "The book schema", title = "Book")
 public class Book {
 
     @ToString.Include
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue
+    @Schema(description = "id of book", $id = "primary key", $schema = "book")
     private Long id;
 
     @ToString.Include

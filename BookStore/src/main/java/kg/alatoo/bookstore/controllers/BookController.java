@@ -1,5 +1,8 @@
 package kg.alatoo.bookstore.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import kg.alatoo.bookstore.dto.BookListDto;
 import kg.alatoo.bookstore.entities.Book;
 import kg.alatoo.bookstore.services.BookService;
@@ -28,10 +31,22 @@ public class BookController {
 
 
     @GetMapping
+    @Operation(summary = "Provides all books by page",
+            description = "Provides all books by page, with default " +
+                    "first page and 10 books in each page",
+            responses = {@ApiResponse(responseCode = "404", description = "Not found")},
+            parameters = {
+                    @Parameter(name = "pageNumber",
+                        description = "Page number to take (0 indexed)"),
+                    @Parameter(name = "page_size",
+                            description = "wrong page size name"
+                    )
+            })
     public Page<BookListDto> getAllBooks(
             @RequestParam(value = "publisher", required = false) String publisher,
             @RequestParam(required = false) Integer pageNumber,
-            @RequestParam(required = false) Integer pageSize
+            @RequestParam(required = false)
+                @Parameter(description = "number of elements on each page") Integer pageSize
     ) {
         return bookService.getBooks(publisher, pageNumber, pageSize);
     }

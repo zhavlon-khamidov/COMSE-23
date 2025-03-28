@@ -1,4 +1,4 @@
-package kg.alatoo.securitydemo;
+package kg.alatoo.securitydemo.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
