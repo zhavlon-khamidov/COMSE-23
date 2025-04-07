@@ -22,6 +22,7 @@ public class User {
     private String username;
     private String password;
 
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private List<Role>  roles;
 
